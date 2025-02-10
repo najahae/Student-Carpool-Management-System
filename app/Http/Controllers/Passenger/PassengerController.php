@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Passenger;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Passenger;
 use Illuminate\Support\Facades\Hash;

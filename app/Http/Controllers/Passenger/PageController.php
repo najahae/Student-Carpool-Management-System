@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Driver;
+namespace App\Http\Controllers\Passenger;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -15,17 +15,7 @@ class PageController extends Controller
      */
     public function maps()
     {
-        return view('driver.map.maps');
-    }
-
-    /**
-     * Display carpool page
-     *
-     * @return \Illuminate\View\View
-     */
-    public function vehicle()
-    {
-        return view('driver.vehicle.index');
+        return view('passenger.map.maps');
     }
 
     /**
@@ -35,7 +25,7 @@ class PageController extends Controller
      */
     public function carpool()
     {
-        return view('driver.carpool.index');
+        return view('passenger.carpool.index');
     }
 
 }

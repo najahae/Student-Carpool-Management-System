@@ -17,6 +17,7 @@ class DriverAuthController extends Controller
      */
     public function showLoginForm()
     {
+        //dd("Driver Login Page Reached!");
         return view('auth.driver.login');
     }
 
@@ -31,7 +32,7 @@ class DriverAuthController extends Controller
         if (Auth::guard('driver')->attempt($credentials)) {
             $request->session()->regenerate(); // Regenerate session to persist login
             \Log::info('Authentication successful.');
-            return redirect()->route('driver.dashboard'); // Redirect to the dashboard
+            return redirect()->route('driver.home'); // Redirect to the dashboard
         }
 
         \Log::info('Authentication failed.');

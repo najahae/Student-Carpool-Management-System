@@ -1,4 +1,4 @@
-@extends('layouts.app', ['pageSlug' => 'dashboard'])
+@extends('driver.layouts.app', ['pageSlug' => 'dashboard'])
 
 @section('content')
 

@@ -1,4 +1,4 @@
-@extends('layouts.app', ['class' => 'register-page', 'page' => __('RideMate'), 'contentClass' => 'register-page'])
+@extends('driver.layouts.app', ['class' => 'register-page', 'page' => __('RideMate'), 'contentClass' => 'register-page'])
 
 @section('content')
     <div class="col-md-10 text-center ml-auto mr-auto">

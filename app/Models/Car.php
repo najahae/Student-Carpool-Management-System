@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\User;
+use App\Models\Driver;
 
 class Car extends Model
 {
@@ -23,7 +23,8 @@ class Car extends Model
         'roadtaxExp',
     ];
 
-    public function user(){
-        return $this->belongsTo('App\Models\User', 'driverID');
+    public function driver(){
+        return $this->belongsTo('App\Models\Driver', 'driverID');
     }
+
 }

@@ -12,8 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('carpool', function (Blueprint $table) {
-            $table->foreign('driverID') ->references('id')-> on ('drivers');
-            $table->foreign('carID') ->references('id')-> on ('car');
+            $table->decimal('fare_per_head', 8, 2)->after('total_fare')->nullable();
         });
     }
 
@@ -23,7 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('carpool', function (Blueprint $table) {
-            //
+            $table->dropColumn('fare_per_head');
         });
     }
 };

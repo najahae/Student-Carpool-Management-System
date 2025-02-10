@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Driver;
 use App\Http\Controllers\Controller;
 use App\Models\Car;
 use Illuminate\Http\Request;
-use App\Models\User;
+use App\Models\Driver;
 
 class CarController extends Controller
 {
@@ -14,10 +14,10 @@ class CarController extends Controller
      */
     public function index()
     {
-        $car = Car::with('user')
+        $car = Car::with('driver')
         ->get();
         //dd($car);
-        return view('vehicle.index',compact('car'));
+        return view('driver.vehicle.index',compact('car'));
     }
 
     /**
@@ -25,11 +25,11 @@ class CarController extends Controller
      */
     public function create()
     {
-        $car = Car::with('user');
+        $car = Car::with('driver');
 
-        $user = User::pluck('studentID', 'id');
+        $driver = Driver::pluck('studentID', 'id');
 
-        return view('vehicle.create', compact('user', 'car'));
+        return view('driver.vehicle.create', compact('driver', 'car'));
     }
 
     /**
@@ -38,14 +38,14 @@ class CarController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'driverID' => 'required|exists:drivers,id',
             'carImage' => 'image|mimes:jpeg,png,jpg|max:2048',
         ]);
         
         $carImagePath = $request->file('carImage')->store('car_images', 'public');
-
+        
         Car::create([
-            //'user_id' => auth()->user()->id,
-            'driverID' => $request->user_id,
+            'driverID' => $request->driverID,
             'carType' => $request->carType,
             'carModel' => $request->carModel,
             'carColor' => $request->carColor,
@@ -55,7 +55,7 @@ class CarController extends Controller
             'roadtaxExp' => $request->roadtaxExp,
            ]);
       
-        return redirect()->route('vehicle.index')
+        return redirect()->route('driver.vehicle.index')
             ->with('success','Vehicle created successfully.');
     }
 
@@ -64,7 +64,7 @@ class CarController extends Controller
      */
     public function show(Car $car)
     {
-        return view('vehicle.show',compact('car'));
+        return view('driver.vehicle.show',compact('car'));
     }
 
     /**
@@ -72,9 +72,9 @@ class CarController extends Controller
      */
     public function edit(Car $car)
     {
-        $user = User::pluck('studentID', 'id');
+        $driver = Driver::pluck('studentID', 'id');
 
-        return view('vehicle.edit',compact('user', 'car'));
+        return view('driver.vehicle.edit',compact('driver', 'car'));
     }
 
     /**
@@ -93,7 +93,7 @@ class CarController extends Controller
 
         $car->update($data);
 
-        return redirect()->route('vehicle.index')->with('success', 'Vehicle updated successfully');
+        return redirect()->route('driver.vehicle.index')->with('success', 'Vehicle updated successfully');
     }
 
     /**
@@ -103,7 +103,7 @@ class CarController extends Controller
     {
         $car->delete();
   
-        return redirect()->route('vehicle.index')
+        return redirect()->route('driver.vehicle.index')
                         ->with('success','Vehicle deleted successfully');
     }
 }

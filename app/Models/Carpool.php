@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\User;
+use App\Models\Driver;
 use App\Models\Car;
 
 class Carpool extends Model
@@ -26,11 +26,20 @@ class Carpool extends Model
         'status',
     ];
 
-    public function user(){
-        return $this->belongsTo('App\Models\User', 'driverID');
+    public function driver(){
+        return $this->belongsTo('App\Models\Driver', 'driverID');
     }
 
     public function car(){
         return $this->belongsTo('App\Models\Car', 'carID');
     }
+
+    public function getFarePerHeadAttribute()
+    {
+        if ($this->car && $this->car->carCapacity > 0) {
+            return number_format($this->total_fare / $this->car->carCapacity, 2);
+        }
+        return 0; // Default value if car capacity is 0 or null
+    }
+
 }

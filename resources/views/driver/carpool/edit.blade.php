@@ -1,4 +1,4 @@
-@extends('layouts.app', ['page' => __('Carpool Information'), 'pageSlug' => 'carpool'])
+@extends('driver.layouts.app', ['page' => __('Carpool Information'), 'pageSlug' => 'carpool'])
 
 @section('content')
 <div class="row">
@@ -29,12 +29,12 @@
             <!-- Student ID -->
             <div class="col-xs-6 col-sm-6 col-md-6">
                 <div class="form-group">
-                    <strong>Student Name:</strong>
+                    <strong>Student ID:</strong>
                <select class="form-control" name="driverID">
-                   <option value="">Choose Student Name</option>
-                   @foreach ($user as $id => $fullname)
+                   <option value="">Choose Student ID:</option>
+                   @foreach ($driver as $id => $studentID)
                        <option
-                           value="{{$id}}" {{ (isset($carpool['driverID']) && $carpool['driverID'] == $id) ? ' selected' : '' }}>{{$fullname}}</option>
+                           value="{{$id}}" {{ (isset($carpool['driverID']) && $carpool['driverID'] == $id) ? ' selected' : '' }}>{{$studentID}}</option>
                    @endforeach
                </select>
            </div>
@@ -127,7 +127,7 @@
             <div class="row mt-3">
                 <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                     <button type="submit" class="btn btn-primary">Update</button>
-                    <a class="btn btn-secondary" href="{{ route('vehicle.index') }}">Back</a>
+                    <a class="btn btn-secondary" href="{{ route('driver.vehicle.index') }}">Back</a>
                 </div>
             </div>
         </form>

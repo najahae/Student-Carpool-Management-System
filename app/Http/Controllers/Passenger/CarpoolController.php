@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Driver;
+namespace App\Http\Controllers\Passenger;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -38,7 +38,7 @@ class CarpoolController extends Controller
         $driver = Driver::pluck('studentID', 'id'); // id => studentID
         $car = Car::pluck('carPlate', 'id'); // id => carPlate
 
-        return view('driver.carpool.create', compact('driver', 'car'));
+        return view('passenger.carpool.create', compact('driver', 'car'));
 
     }
 
@@ -48,7 +48,7 @@ class CarpoolController extends Controller
     public function store(Request $request)
     {
         $carpool = Carpool::create($request->all());
-        return redirect()->route('driver.carpool.index')
+        return redirect()->route('passenger.carpool.index')
             ->with('success', 'Carpool created successfully.');
     }
 
@@ -57,7 +57,7 @@ class CarpoolController extends Controller
      */
     public function show(Carpool $carpool)
     {
-        return view('driver.carpool.show',compact('carpool'));
+        return view('passenger.carpool.show',compact('carpool'));
     }
 
     /**
@@ -65,11 +65,7 @@ class CarpoolController extends Controller
      */
     public function edit(Carpool $carpool)
     {
-        $driver = Driver::pluck('studentID', 'id');
 
-        $car = Car::pluck('carPlate', 'id');
-
-        return view('driver.carpool.edit',compact('driver', 'car', 'carpool'));
     }
 
     /**
@@ -77,10 +73,7 @@ class CarpoolController extends Controller
      */
     public function update(Request $request, Carpool $carpool)
     {
-        $carpool->update($request->all());
-
-       return redirect()->route('driver.carpool.index')
-                        ->with('success','Carpool updated successfully');
+        
     }
 
     /**
@@ -88,9 +81,6 @@ class CarpoolController extends Controller
      */
     public function destroy(Carpool $carpool)
     {
-        $carpool->delete();
-  
-        return redirect()->route('driver.carpool.index')
-                        ->with('success','Carpool deleted successfully');
+        
     }
 }

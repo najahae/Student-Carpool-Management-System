@@ -7,36 +7,42 @@ use App\Models\Passenger;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
 
 class PassengerAuthController extends Controller
 {
+
     /**
-     * Show the login form.
+     * Show the passenger login form.
      */
     public function showLoginForm()
     {
+        //dd("Passenger Login Page Reached!");
         return view('auth.passenger.login');
     }
 
     /**
-     * Handle login request.
+     * Handle passenger login.
      */
     public function login(Request $request)
     {
-        $credentials = $request->validate([
-            'email' => 'required|email',
-            'password' => 'required|string|min:6',
-        ]);
+        $credentials = $request->only('email', 'password');
+        \Log::info('Attempting login with credentials:', $credentials);
 
         if (Auth::guard('passenger')->attempt($credentials)) {
-            return redirect()->route('passenger.dashboard');
+            $request->session()->regenerate(); // Regenerate session to persist login
+            \Log::info('Authentication successful.');
+            return redirect()->route('passenger.dashboard'); // Redirect to the dashboard
         }
 
-        return back()->withErrors(['email' => 'Invalid credentials.']);
+        \Log::info('Authentication failed.');
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ])->onlyInput('email');
     }
 
     /**
-     * Show the registration form.
+     * Show the passenger registration form.
      */
     public function showRegisterForm()
     {
@@ -44,20 +50,19 @@ class PassengerAuthController extends Controller
     }
 
     /**
-     * Handle registration request.
+     * Handle passenger registration.
      */
     public function register(Request $request)
     {
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:passengers,email',
-            'student_id' => 'required|string|unique:passengers,student_id',
-            'password' => 'required|string|min:6|confirmed',
-            'phone' => 'required|string|min:10',
+            'email' => 'required|string|email|max:255|unique:passengers,email',
+            'student_id' => 'required|string|max:255|unique:passengers,student_id',
+            'password' => 'required|string|min:8|confirmed',
+            'phone' => 'required|string|max:15',
         ]);
 
-        // Create Passenger
-        $passenger = Passenger::create([
+        $passengers = Passenger::create([
             'name' => $validatedData['name'],
             'email' => $validatedData['email'],
             'student_id' => $validatedData['student_id'],
@@ -65,15 +70,30 @@ class PassengerAuthController extends Controller
             'phone' => $validatedData['phone'],
         ]);
 
-        return redirect()->route('auth.passenger.login')->with('success', 'Registration successful. Please log in.');
+        Auth::guard('passenger')->login($passengers);
+
+        return redirect()->route('passenger.login')->with('success', 'Registration successful.');
     }
 
+
+
     /**
-     * Logout the passenger.
+     * Handle passenger logout.
      */
-    public function logout()
+    public function logout(Request $request)
     {
         Auth::guard('passenger')->logout();
-        return redirect()->route('auth.passenger.login')->with('success', 'You have been logged out.');
+
+        // Invalidate and regenerate session
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('welcome')->with('success', 'Logged out successfully.');
     }
+
+    public function __construct()
+    {
+        $this->middleware('guest:passenger')->except('logout');
+    }
+
 }

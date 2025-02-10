@@ -1,12 +1,12 @@
 <div class="sidebar">
     <div class="sidebar-wrapper">
         <div class="logo">
-            <a href="{{ route('home') }}" class="simple-text logo-mini">{{ __('RM') }}</a>
-            <a href="{{ route('home') }}" class="simple-text logo-normal">{{ __('RideMate') }}</a>
+            <a href="{{ route('driver.home') }}" class="simple-text logo-mini">{{ __('RM') }}</a>
+            <a href="{{ route('driver.home') }}" class="simple-text logo-normal">{{ __('RideMate') }}</a>
         </div>
         <ul class="nav">
             <li @if ($pageSlug == 'dashboard') class="active " @endif>
-                <a href="{{ route('home') }}">
+                <a href="{{ route('driver.home') }}">
                     <i class="tim-icons icon-components"></i>
                     <p>{{ __('Dashboard') }}</p>
                 </a>
@@ -18,7 +18,8 @@
                 </a>
             </li>
             <li @if ($pageSlug == 'maps') class="active " @endif>
-                <a href="{{ route('driver.pages.maps') }}">
+                <a href="{{ route('driver.map.maps') }}">
+
                     <i class="tim-icons icon-pin"></i>
                     <p>{{ __('Maps') }}</p>
                 </a>

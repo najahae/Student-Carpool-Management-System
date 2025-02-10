@@ -18,7 +18,10 @@ class Driver extends Authenticatable
      * @var array<int, string>
      */
 
+    protected $table = 'drivers';
+    
     protected $fillable = [
+        'profile_picture',
         'fullname',
         'gender',
         'studentID',
@@ -48,4 +51,10 @@ class Driver extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function carpools()
+    {
+        return $this->hasMany(Carpool::class, 'driverID', 'id');
+    }
+
 }

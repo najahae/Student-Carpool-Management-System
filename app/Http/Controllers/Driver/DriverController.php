@@ -4,44 +4,28 @@ namespace App\Http\Controllers\Driver;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
-use App\Http\Requests\ProfileRequest;
+use App\Http\Requests\DriverRequest;
 use App\Http\Requests\PasswordRequest;
 
 class DriverController extends Controller
 {
-    /**
-     * Show the form for editing the profile.
-     *
-     * @return \Illuminate\View\View
-     */
     public function edit()
     {
         return view('driver.profile.edit');
     }
 
-    /**
-     * Update the profile
-     *
-     * @param  \App\Http\Requests\ProfileRequest  $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function update(DriverRequest $request)
+    public function update(DriverRequest $request) // Fix DriverRequest -> ProfileRequest
     {
-        auth()->driver()->update($request->all());
+        auth()->user()->update($request->all()); // Fix auth()->driver() -> auth()->user()
 
         return back()->withStatus(__('Profile successfully updated.'));
     }
 
-    /**
-     * Change the password
-     *
-     * @param  \App\Http\Requests\PasswordRequest  $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
     public function password(PasswordRequest $request)
     {
-        auth()->driver()->update(['password' => Hash::make($request->get('password'))]);
+        auth()->user()->update(['password' => Hash::make($request->get('password'))]); // Fix auth()->driver() -> auth()->user()
 
         return back()->withPasswordStatus(__('Password successfully updated.'));
     }
 }
+

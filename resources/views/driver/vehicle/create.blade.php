@@ -1,4 +1,4 @@
-@extends('layouts.app', ['page' => __('Vehicle Information'), 'pageSlug' => 'vehicles'])
+@extends('driver.layouts.app', ['page' => __('Vehicle Information'), 'pageSlug' => 'vehicles'])
 @section('content')
 <div class="row">
     <div class="col-lg-12 margin-tb">
@@ -29,7 +29,7 @@
                     <strong>Student ID:</strong>
                <select class="form-control" name="driverID">
                    <option value="">Choose Student ID</option>
-                   @foreach ($user as $id => $studentID)
+                   @foreach ($driver as $id => $studentID)
                        <option
                            value="{{$id}}" {{ (isset($car->driverID) && $car->driverID == $id) ? ' selected' : '' }}>{{$studentID}}</option>
                    @endforeach
@@ -107,7 +107,7 @@
             <div class="row mt-3">
                 <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                     <button type="submit" class="btn btn-primary">Submit</button>
-                    <a class="btn btn-secondary" href="{{ route('vehicle.index') }}"> Back</a>
+                    <a class="btn btn-secondary" href="{{ route('driver.vehicle.index') }}"> Back</a>
                 </div>
             </div>
         </form>

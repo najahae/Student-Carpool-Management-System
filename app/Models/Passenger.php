@@ -11,6 +11,8 @@ class Passenger extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
     
+    protected $table = 'passengers';
+    
     protected $fillable = [
         'name',
         'email',

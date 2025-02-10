@@ -1,4 +1,4 @@
-@extends('driver.layouts.app', ['page' => __('User Profile'), 'pageSlug' => 'profile'])
+@extends('layouts.app', ['page' => __('User Profile'), 'pageSlug' => 'profile'])
 
 @section('content')
     <div class="row">
@@ -7,7 +7,7 @@
                 <div class="card-header">
                     <h5 class="title">{{ __('Edit Profile') }}</h5>
                 </div>
-                <form method="post" action="{{ route('driver.profile.update') }}" enctype="multipart/form-data" autocomplete="off">
+                <form method="post" action="{{ route('profile.update') }}" enctype="multipart/form-data" autocomplete="off">
                     <div class="card-body">
                             @csrf
                             @method('put')
@@ -95,9 +95,10 @@
                 <div class="card-header">
                     <h5 class="title">{{ __('Password') }}</h5>
                 </div>
-                <form method="post" action="{{ route('driver.profile.password') }}" autocomplete="off">
+                <form method="post" action="{{ route('profile.password') }}" autocomplete="off">
                     <div class="card-body">
                         @csrf
+                        @method('put')
 
                         @include('alerts.success', ['key' => 'password_status'])
 
@@ -124,27 +125,42 @@
             </div>
         </div>
         <div class="col-md-4">
-    <div class="card card-user">
-        <div class="card-body">
-            <p class="card-text">
-                <div class="author">
-                    <div class="block block-one"></div>
-                    <div class="block block-two"></div>
-                    <div class="block block-three"></div>
-                    <div class="block block-four"></div>
-                    <a href="#">
-                        <img class="avatar" 
-                            src="{{ auth()->user()->profile_picture ? asset('storage/' . auth()->user()->profile_picture) : asset('black/img/default-avatar.png') }}" 
-                            alt="Profile Picture">
-                        <h5 class="title">{{ auth()->user()->fullname }}</h5>
-                        <h5 class="title">{{ auth()->user()->studentID }}</h5>
-                    </a>
+            <div class="card card-user">
+                <div class="card-body">
+                    <p class="card-text">
+                        <div class="author">
+                            <div class="block block-one"></div>
+                            <div class="block block-two"></div>
+                            <div class="block block-three"></div>
+                            <div class="block block-four"></div>
+                            <a href="#">
+                                <img class="avatar" src="{{ asset('black') }}/img/emilyz.jpg" alt="">
+                                <h5 class="title">{{ auth()->user()->name }}</h5>
+                            </a>
+                            <p class="description">
+                                {{ __('Ceo/Co-Founder') }}
+                            </p>
+                        </div>
+                    </p>
+                    <div class="card-description">
+                        {{ __('Do not be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...') }}
+                    </div>
                 </div>
-            </p>
+                <div class="card-footer">
+                    <div class="button-container">
+                        <button class="btn btn-icon btn-round btn-facebook">
+                            <i class="fab fa-facebook"></i>
+                        </button>
+                        <button class="btn btn-icon btn-round btn-twitter">
+                            <i class="fab fa-twitter"></i>
+                        </button>
+                        <button class="btn btn-icon btn-round btn-google">
+                            <i class="fab fa-google-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
-
     </div>
 
 <style>

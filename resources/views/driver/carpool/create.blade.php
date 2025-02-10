@@ -1,4 +1,4 @@
-@extends('layouts.app', ['page' => __('Carpool Information'), 'pageSlug' => 'carpool'])
+@extends('driver.layouts.app', ['page' => __('Carpool Information'), 'pageSlug' => 'carpool'])
 @section('content')
 <div class="row">
     <div class="col-lg-12 margin-tb">
@@ -26,12 +26,12 @@
             
             <div class="col-xs-6 col-sm-6 col-md-6">
                 <div class="form-group">
-                    <strong>Driver Name:</strong>
+                    <strong>Student ID:</strong>
                <select class="form-control" name="driverID">
-                   <option value="">Choose Driver Name</option>
-                   @foreach ($user as $id => $fullname)
+                   <option value="">Choose Student ID:</option>
+                   @foreach ($driver as $id => $studentID)
                        <option
-                           value="{{$id}}" {{ (isset($carpool->driverID) && $carpool->driverID == $id) ? ' selected' : '' }}>{{$fullname}}</option>
+                           value="{{$id}}" {{ (isset($carpool->driverID) && $carpool->driverID == $id) ? ' selected' : '' }}>{{$studentID}}</option>
                    @endforeach
                </select>
            </div>
@@ -102,13 +102,6 @@
 
             <div class="col-xs-6 col-sm-6 col-md-6">
                 <div class="form-group">
-                    <strong>Fare Per Head (RM): </strong>
-                    <input type="text" name="fare_per_head" class="form-control">
-                </div>
-            </div>
-
-            <div class="col-xs-6 col-sm-6 col-md-6">
-                <div class="form-group">
                     <strong>Status:</strong>
                     <select name="status" class="form-control">
                         <option value="">Select Carpool Status</option>
@@ -123,7 +116,7 @@
             <div class="row mt-3">
                 <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                     <button type="submit" class="btn btn-primary">Submit</button>
-                    <a class="btn btn-secondary" href="{{ route('carpool.index') }}"> Back</a>
+                    <a class="btn btn-secondary" href="{{ route('driver.carpool.index') }}"> Back</a>
                 </div>
             </div>
         </form>

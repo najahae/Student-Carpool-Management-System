@@ -1,4 +1,4 @@
-@extends('layouts.app', ['class' => 'register-page', 'page' => __('RideMate'), 'contentClass' => 'register-page'])
+@extends('passenger.layouts.app', ['class' => 'register-page', 'page' => __('RideMate'), 'contentClass' => 'register-page'])
 
 @section('content')
     <div class="col-md-10 text-center ml-auto mr-auto">
@@ -15,27 +15,15 @@
             </div>
 
             <!-- Full Name -->
-            <div class="input-group{{ $errors->has('fullname') ? ' has-danger' : '' }}">
+            <div class="input-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                 <div class="input-group-prepend">
                     <div class="input-group-text">
                         <i class="tim-icons icon-single-02"></i>
                     </div>
                 </div>
-                <input type="text" name="fullname" class="form-control{{ $errors->has('fullname') ? ' is-invalid' : '' }}" 
-                    placeholder="{{ __('Full Name') }}" value="{{ old('fullname') }}">
-                @include('alerts.feedback', ['field' => 'fullname'])
-            </div>
-
-            <!-- Student ID -->
-            <div class="input-group{{ $errors->has('studentID') ? ' has-danger' : '' }}">
-                <div class="input-group-prepend">
-                    <div class="input-group-text">
-                        <i class="tim-icons icon-badge"></i>
-                    </div>
-                </div>
-                <input type="text" name="studentID" class="form-control{{ $errors->has('studentID') ? ' is-invalid' : '' }}" 
-                    placeholder="{{ __('Student ID') }}" value="{{ old('studentID') }}">
-                @include('alerts.feedback', ['field' => 'studentID'])
+                <input type="text" name="name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" 
+                    placeholder="{{ __('Full Name') }}" value="{{ old('name') }}">
+                @include('alerts.feedback', ['field' => 'name'])
             </div>
 
             <!-- Email -->
@@ -50,16 +38,28 @@
                 @include('alerts.feedback', ['field' => 'email'])
             </div>
 
+            <!-- Student ID -->
+            <div class="input-group{{ $errors->has('student_id') ? ' has-danger' : '' }}">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <i class="tim-icons icon-badge"></i>
+                    </div>
+                </div>
+                <input type="text" name="student_id" class="form-control{{ $errors->has('student_id') ? ' is-invalid' : '' }}" 
+                    placeholder="{{ __('Student ID') }}" value="{{ old('student_id') }}">
+                @include('alerts.feedback', ['field' => 'student_id'])
+            </div>
+
             <!-- Phone Number -->
-            <div class="input-group{{ $errors->has('phoneNum') ? ' has-danger' : '' }}">
+            <div class="input-group{{ $errors->has('phone') ? ' has-danger' : '' }}">
                 <div class="input-group-prepend">
                     <div class="input-group-text">
                         <i class="tim-icons icon-mobile"></i>
                     </div>
                 </div>
-                <input type="text" name="phoneNum" class="form-control{{ $errors->has('phoneNum') ? ' is-invalid' : '' }}" 
-                    placeholder="{{ __('Phone Number') }}" value="{{ old('phoneNum') }}">
-                @include('alerts.feedback', ['field' => 'phoneNum'])
+                <input type="text" name="phone" class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" 
+                    placeholder="{{ __('Phone Number') }}" value="{{ old('phone') }}">
+                @include('alerts.feedback', ['field' => 'phone'])
             </div>
 
             <!-- Password -->
