@@ -78,7 +78,7 @@
 
                     var distanceText = result.routes[0].legs[0].distance.text;
                     var durationText = result.routes[0].legs[0].duration.text;
-                    var distanceValue = result.routes[0].legs[0].distance.value / 1000; // Convert meters to km
+                    var distanceValue = result.routes[0].legs[0].distance.value / 1000;
 
                     var fareRate = 1.00; // Set fare per km (adjust if needed)
                     var estimatedFare = (distanceValue * fareRate).toFixed(2);

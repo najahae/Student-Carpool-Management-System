@@ -53,7 +53,7 @@
                                 <small class="text-muted">📅 Details</small>
                                 <p class="mb-1"><strong>Date:</strong> {{ $c->pickup_date }}</p>
                                 <p class="mb-1"><strong>Total Fare:</strong> RM{{ $c->total_fare }}</p>
-                                <p class="mb-1"><strong>Fare Per Head:</strong> RM{{ $c->fare_per_head }}</p>
+                                <!-- <p class="mb-1"><strong>Fare Per Head:</strong> RM{{ $c->fare_per_head }}</p> -->
                             </div>
                         </div>
 
@@ -63,7 +63,7 @@
                             <form action="{{ route('driver.carpool.destroy', $c->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this carpool?');">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                <button type="submit" class="btn btn-danger btn-sm">Cancel</button>
                             </form>
                         </div>
 

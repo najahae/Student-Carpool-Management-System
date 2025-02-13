@@ -70,6 +70,7 @@ class Kernel extends HttpKernel
         'auth' => \App\Http\Middleware\Authenticate::class,
         'auth.driver' => \App\Http\Middleware\DriverMiddleware::class,
         'auth.passenger' => \App\Http\Middleware\PassengerMiddleware::class,
+        'auth.admin' => \App\Http\Middleware\AdminMiddleware::class,
     ];
     
 }

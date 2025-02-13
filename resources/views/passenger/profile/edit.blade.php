@@ -1,4 +1,4 @@
-@extends('layouts.app', ['page' => __('User Profile'), 'pageSlug' => 'profile'])
+@extends('passenger.layouts.app', ['page' => __('User Profile'), 'pageSlug' => 'profile'])
 
 @section('content')
     <div class="row">
@@ -7,40 +7,17 @@
                 <div class="card-header">
                     <h5 class="title">{{ __('Edit Profile') }}</h5>
                 </div>
-                <form method="post" action="{{ route('profile.update') }}" enctype="multipart/form-data" autocomplete="off">
+                <form method="post" action="{{ route('passenger.profile.update') }}" enctype="multipart/form-data" autocomplete="off">
                     <div class="card-body">
                             @csrf
                             @method('put')
 
                             @include('alerts.success')
 
-                            <div class="form-group{{ $errors->has('fullname') ? ' has-danger' : '' }}">
+                            <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                                 <label>{{ __('Full Name') }}</label>
-                                <input type="text" name="fullname" class="form-control{{ $errors->has('fullname') ? ' is-invalid' : '' }}" placeholder="{{ __('Full Name') }}" value="{{ old('fullname', auth()->user()->fullname) }}">
-                                @include('alerts.feedback', ['field' => 'fullname'])
-                            </div>
-
-                            <div class="form-group{{ $errors->has('gender') ? ' has-danger' : '' }}">
-                                <label>{{ __('Gender') }}</label>
-                                <select name="gender" class="form-control{{ $errors->has('gender') ? ' is-invalid' : '' }}">
-                                    <option value="" disabled selected>{{ __('Select Gender') }}</option>
-                                    <option value="male" {{ old('gender', auth()->user()->gender) == 'male' ? 'selected' : '' }}>{{ __('Male') }}</option>
-                                    <option value="female" {{ old('gender', auth()->user()->gender) == 'female' ? 'selected' : '' }}>{{ __('Female') }}</option>
-                                    <option value="other" {{ old('gender', auth()->user()->gender) == 'other' ? 'selected' : '' }}>{{ __('Other') }}</option>
-                                </select>
-                                @include('alerts.feedback', ['field' => 'gender'])
-                            </div>
-
-                            <div class="form-group{{ $errors->has('studentID') ? ' has-danger' : '' }}">
-                                <label>{{ __('Student ID') }}</label>
-                                <input type="text" name="studentID" class="form-control{{ $errors->has('studentID') ? ' is-invalid' : '' }}" placeholder="{{ __('Student ID') }}" value="{{ old('studentID', auth()->user()->studentID) }}">
-                                @include('alerts.feedback', ['field' => 'studentID'])
-                            </div>
-
-                            <div class="form-group{{ $errors->has('phoneNum') ? ' has-danger' : '' }}">
-                                <label>{{ __('Phone Number') }}</label>
-                                <input type="text" name="phoneNum" class="form-control{{ $errors->has('phoneNum') ? ' is-invalid' : '' }}" placeholder="{{ __('Phone Number') }}" value="{{ old('phoneNum', auth()->user()->phoneNum) }}">
-                                @include('alerts.feedback', ['field' => 'phoneNum'])
+                                <input type="text" name="name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Full Name') }}" value="{{ old('name', auth()->user()->name) }}">
+                                @include('alerts.feedback', ['field' => 'name'])
                             </div>
 
                             <div class="form-group{{ $errors->has('email') ? ' has-danger' : '' }}">
@@ -49,40 +26,16 @@
                                 @include('alerts.feedback', ['field' => 'email'])
                             </div>
 
-                            <div class="form-group{{ $errors->has('studentCard') ? ' has-danger' : '' }}">
-                                <label>{{ __('Student Card') }}</label>
-                                <!-- Display current image if exists -->
-                                @if(auth()->user()->studentCard)
-                                <div class="mt-2">
-                                    <img src="{{ asset('storage/' . auth()->user()->studentCard) }}" alt="Student Card" width="100">
-                                </div>
-                                @endif
-    
-                                <!-- File Input styled as a button -->
-                                <div class="custom-file">
-                                    <input type="file" name="studentCard" class="custom-file-input{{ $errors->has('studentCard') ? ' is-invalid' : '' }}" id="studentCardInput">
-                                    <label class="custom-file-label" for="studentCardInput">{{ __('Choose file') }}</label>
-                                </div>
-                                @include('alerts.feedback', ['field' => 'studentCard'])
-                                <small class="form-text text-muted">Upload a JPEG, PNG, or JPG file not exceeding 2MB.</small>
+                            <div class="form-group{{ $errors->has('student_id') ? ' has-danger' : '' }}">
+                                <label>{{ __('Student ID') }}</label>
+                                <input type="text" name="student_id" class="form-control{{ $errors->has('student_id') ? ' is-invalid' : '' }}" placeholder="{{ __('Student ID') }}" value="{{ old('student_id', auth()->user()->student_id) }}">
+                                @include('alerts.feedback', ['field' => 'student_id'])
                             </div>
-                            
-                            <div class="form-group{{ $errors->has('licenseCard') ? ' has-danger' : '' }}">
-                                <label>{{ __('License Card') }}</label>
-                                <!-- Display current image if exists -->
-                                @if(auth()->user()->licenseCard)
-                                <div class="mt-2">
-                                    <img src="{{ asset('storage/' . auth()->user()->licenseCard) }}" alt="License Card Image" width="100">
-                                </div>
-                                @endif
-    
-                                <!-- File Input styled as a button -->
-                                <div class="custom-file">
-                                    <input type="file" name="licenseCard" class="custom-file-input{{ $errors->has('licenseCard') ? ' is-invalid' : '' }}" id="licenseCardInput">
-                                    <label class="custom-file-label" for="licenseCardInput">{{ __('Choose file') }}</label>
-                                </div>
-                                @include('alerts.feedback', ['field' => 'licenseCard'])
-                                <small class="form-text text-muted">Upload a JPEG, PNG, or JPG file not exceeding 2MB.</small>
+
+                            <div class="form-group{{ $errors->has('phone') ? ' has-danger' : '' }}">
+                                <label>{{ __('Phone Number') }}</label>
+                                <input type="text" name="phone" class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" placeholder="{{ __('Phone Number') }}" value="{{ old('phone', auth()->user()->phone) }}">
+                                @include('alerts.feedback', ['field' => 'phone'])
                             </div>
                     </div>
                     <div class="card-footer">
@@ -95,7 +48,7 @@
                 <div class="card-header">
                     <h5 class="title">{{ __('Password') }}</h5>
                 </div>
-                <form method="post" action="{{ route('profile.password') }}" autocomplete="off">
+                <form method="post" action="{{ route('passenger.profile.password') }}" autocomplete="off">
                     <div class="card-body">
                         @csrf
                         @method('put')
@@ -137,14 +90,8 @@
                                 <img class="avatar" src="{{ asset('black') }}/img/emilyz.jpg" alt="">
                                 <h5 class="title">{{ auth()->user()->name }}</h5>
                             </a>
-                            <p class="description">
-                                {{ __('Ceo/Co-Founder') }}
-                            </p>
                         </div>
                     </p>
-                    <div class="card-description">
-                        {{ __('Do not be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...') }}
-                    </div>
                 </div>
                 <div class="card-footer">
                     <div class="button-container">

@@ -13,21 +13,26 @@ class CarpoolController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $carpool = Carpool::with('driver', 'car')
         ->get();
-        //dd( $carpool);
-        // Calculate fare per head dynamically
-        foreach ($carpool as $c) {
-            if ($c->car && $c->car->carCapacity > 0) {
-                $c->fare_per_head = number_format($c->total_fare / $c->car->carCapacity, 2);
-            } else {
-                $c->fare_per_head = 0; // Default if capacity is invalid
-            }
+
+        $query = Carpool::with('driver', 'car');
+
+        // Check if the gender filter is applied
+        if ($request->filled('gender')) {
+            $query->whereHas('driver', function ($q) use ($request) {
+                $q->where('gender', $request->gender);
+        });
         }
 
-        return view('driver.carpool.index',compact('carpool'));
+        // Fetch timetables based on the query (filtered or not)
+        $carpool = $query->get();
+        //dd( $carpool);
+        // Calculate fare per head dynamically
+
+        return view('passenger.carpool.index',compact('carpool'));
     }
 
     /**

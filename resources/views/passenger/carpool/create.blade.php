@@ -1,10 +1,9 @@
-@extends('passenger.layouts.app', ['page' => __('Join A Carpool'), 'pageSlug' => 'carpool'])
-
+@extends('passenger.layouts.app', ['page' => __('List of Carpools'), 'pageSlug' => 'carpool'])
 @section('content')
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2>Add New Timetable</h2>
+            <h2>Add New Carpool</h2>
         </div>
     </div>
 </div>
@@ -20,7 +19,7 @@
     </div>
 @endif
 
-<form action="{{ route('timetables.store') }}" method="POST">
+<form action="{{ route('carpool.store') }}" method="POST">
     @csrf
 
     <div class="row">

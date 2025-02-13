@@ -7,13 +7,13 @@
                 <div class="row justify-content-center">
                     <div class="col-lg-5 col-md-6">
                         <!-- Larger Welcome Text -->
-                        <h1 class="text-white display-2">{{ __('Select Your Role') }}</h1>
+                        <h1 class="text-white display-2">{{ __('RideMate') }}</h1>
                         <p class="text-lead text-light display-4">
                             {{ __('Choose your role to proceed with login.') }}
                         </p>
                         <!-- Buttons for different logins -->
                         <div class="d-flex justify-content-center gap-5 mt-4">
-                            <a href=# class="btn btn-primary btn-lg">
+                            <a href="{{ route('admin.login') }}" class="btn btn-primary btn-lg">
                                 {{ __('Admin') }}
                             </a>
                             <a href="{{ route('driver.login') }}" class="btn btn-secondary btn-lg">

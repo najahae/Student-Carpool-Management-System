@@ -99,14 +99,7 @@
             <div class="col-xs-6 col-sm-6 col-md-6">
                 <div class="form-group">
                     <strong>Total Fare:</strong>
-                    <input type="text" name="totalFare" value="{{ $carpool->total_fare }}" class="form-control" placeholder="Total Fare">
-                </div>
-            </div>
-
-            <div class="col-xs-6 col-sm-6 col-md-6">
-                <div class="form-group">
-                    <strong>Fare Per Head:</strong>
-                    <input type="text" name="fare_per_head" value="{{ $carpool->fare_per_head }}" class="form-control" placeholder="Fare Per Head">
+                    <input type="text" name="total_fare" value="{{ $carpool->total_fare }}" class="form-control" placeholder="Total Fare">
                 </div>
             </div>
 

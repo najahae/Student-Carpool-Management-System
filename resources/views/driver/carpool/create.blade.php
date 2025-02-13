@@ -108,7 +108,6 @@
                         <option value="open">Open</option>
                         <option value="full">Full</option>
                         <option value="completed">Completed</option>
-                        <option value="canceled">Canceled</option>
                     </select>
                 </div>
             </div>

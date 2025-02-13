@@ -126,3 +126,20 @@
         </form>
     </div>
 @endsection
+
+<style>
+    .card {
+        border: 1px solidrgb(54, 39, 85); /* Light border color */
+        border-radius: 8px;
+        padding: 15px;
+        margin-top: 20px;
+    }
+
+    select option {
+        color: gray;
+    }
+
+    .mt-3 {
+        margin-top: 1rem;
+    }
+</style>

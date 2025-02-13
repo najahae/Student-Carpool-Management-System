@@ -33,7 +33,7 @@
             <!-- Footer Links -->
             <div class="text-center">
                 <h6>
-                    <a href="{{ route('login') }}" class="link footer-link">{{ __('Back to Login') }}</a>
+                    <a href="{{ route('admin.loginPage') }}" class="link footer-link">{{ __('Back to Login') }}</a>
                 </h6>
             </div>
         </form>

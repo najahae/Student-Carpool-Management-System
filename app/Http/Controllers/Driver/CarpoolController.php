@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Driver;
 use App\Models\Car;
 use App\Models\Carpool;
+use Illuminate\Support\Facades\Auth;
 
 class CarpoolController extends Controller
 {
@@ -19,14 +20,16 @@ class CarpoolController extends Controller
         ->get();
         //dd( $carpool);
         // Calculate fare per head dynamically
-        foreach ($carpool as $c) {
-            if ($c->car && $c->car->carCapacity > 0) {
-                $c->fare_per_head = number_format($c->total_fare / $c->car->carCapacity, 2);
-            } else {
-                $c->fare_per_head = 0; // Default if capacity is invalid
-            }
-        }
 
+        // foreach ($carpool as $c) {
+        //     if ($c->car && $c->car->carCapacity > 0) {
+        //         $c->fare_per_head = number_format($c->total_fare / $c->car->carCapacity, 2);
+        //     } else {
+        //         $c->fare_per_head = 0; // Default if capacity is invalid
+        //     }
+        // }
+
+        $carpool = Carpool::where('driverID', Auth::id())->get();
         return view('driver.carpool.index',compact('carpool'));
     }
 

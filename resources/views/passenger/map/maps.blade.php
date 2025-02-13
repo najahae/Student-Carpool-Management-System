@@ -1,4 +1,4 @@
-@extends('driver.layouts.app', ['page' => __('Maps'), 'pageSlug' => 'maps'])
+@extends('passenger.layouts.app', ['page' => __('Maps'), 'pageSlug' => 'maps'])
 
 @section('content')
 <div class="container mt-5">
